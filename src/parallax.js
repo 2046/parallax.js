@@ -12,7 +12,7 @@
             anchors: [],
             animated: false,
             scrollingSpeed: 1000,
-            bottomShowScrollBar: true,
+            bottomShowScrollBar: false,
             callback: function (currentIndex, currentPage, container, next) {
             }
         }, options);

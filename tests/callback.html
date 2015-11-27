@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title></title>
+    <style>
+        * {margin: 0;padding: 0;}
+        .section1 {background: red;}
+        .section2 {background: blue;}
+        .section3 {background: yellow;}
+        .section4 {background: dimgrey;}
+        .section5 {background: darkturquoise;}
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+    <div class="section"></div>
+</div>
+<script src="js/lib/jquery.min.js"></script>
+<script src="js/dist/parallax.js"></script>
+<script>
+    $('.wrapper').parallax({
+      callback : function(currentIndex, currentPage, container, next){
+        console.log(currentIndex, currentPage, container, next);
+      }
+    });
+</script>
+</body>
+</html>
