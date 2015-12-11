@@ -279,7 +279,6 @@
                         top: -top
                     }, scrollingSpeed, $.proxy(function () {
                         this.get('callback')(value, this.sectionsElement.eq(value), element, this.get('animated') ? next : next());
-                        this.set('animationing', false);
                     }, this));
                 }
             }
