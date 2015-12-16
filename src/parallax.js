@@ -10,6 +10,7 @@
     $.fn.parallax = function (options) {
         options = $.extend({
             anchors: [],
+            diffHeight : 0,
             animated: false,
             scrollingSpeed: 1000,
             bottomShowScrollBar: false,
@@ -41,7 +42,7 @@
 
                 this.set('crop', true);
                 this.set('width', $window.width());
-                this.set('height', $window.height());
+                this.set('height', $window.height() - options.diffHeight);
                 this.set('anchors', options.anchors);
                 this.set('animated', options.animated);
                 this.set('callback', options.callback);
@@ -98,7 +99,7 @@
             bindWindowResizeEvent: function () {
                 $window.on('resize', $.proxy(function () {
                     this.set('width', $window.width());
-                    this.set('height', $window.height());
+                    this.set('height', $window.height() - options.diffHeight);
                     this.movePage(this.get('currentPage'));
                 }, this));
             },
