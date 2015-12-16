@@ -9,6 +9,7 @@
 
     $.fn.parallax = function (options) {
         options = $.extend({
+            style : {},
             anchors: [],
             diffHeight : 0,
             animated: false,
@@ -74,7 +75,7 @@
                     height: this.get('height')
                 });
 
-                this.element.css($.extend({}, cssObj, {
+                this.element.css($.extend(options.style, cssObj, {
                     'position': 'relative'
                 }));
 
