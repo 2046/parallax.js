@@ -69,13 +69,13 @@
 
                 this.rootElement.css(cssObj);
 
-                this.wrapElement.css({
+                this.wrapElement.css($.extend(options.style, {
                     overflow: 'hidden',
                     width: this.get('width'),
                     height: this.get('height')
-                });
+                }));
 
-                this.element.css($.extend(options.style, cssObj, {
+                this.element.css($.extend({}, cssObj, {
                     'position': 'relative'
                 }));
 
