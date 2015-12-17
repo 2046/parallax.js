@@ -273,7 +273,8 @@
                         element.css(getTransition('all ' + scrollingSpeed + 'ms ease'));
                     }
 
-                    element.one('transitionend oTransitionEnd webkitTransitionEnd', $.proxy(function () {
+                    element.on('transitionend oTransitionEnd webkitTransitionEnd', $.proxy(function () {
+                        element.off('transitionend oTransitionEnd webkitTransitionEnd');
                         this.get('callback')(value, this.sectionsElement.eq(value), element, this.get('animated') ? next : next());
                     }, this)).css(getTransforms('translate3d(0px, -' + top + 'px, 0px)'));
                 } else {
