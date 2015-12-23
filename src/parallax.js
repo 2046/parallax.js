@@ -53,7 +53,6 @@
                 this.renderStyle();
                 this.bindScrollEvent();
                 this.bindWindowResizeEvent();
-                this.bindWindowScrollEvent();
 
                 this.element.data('instance', this);
             },
@@ -120,6 +119,9 @@
                         }
                     }
                 }, this));
+            },
+            unbindWindowScrollEvent : function(){
+                $window.off('scroll');
             },
             MouseWheelHandler: function (e) {
                 var curTime, delta, horizontalDetection, isScrollingVertically;
@@ -206,11 +208,13 @@
             },
             showScrollBar: function () {
                 this.set('crop', false);
-                this.unbindScrollEvent()
+                this.unbindScrollEvent();
+                this.bindWindowScrollEvent();
             },
             hideScrollBar: function () {
                 this.set('crop', true);
                 this.bindScrollEvent();
+                this.unbindWindowScrollEvent();
             },
             get: function (key) {
                 return this.attributes[key];
@@ -270,10 +274,10 @@
                 if (isSupport3d) {
                     if (!element.data('hasTransitionStyle')) {
                         element.data('hasTransitionStyle', true);
-                        element.css(getTransition('all ' + scrollingSpeed + 'ms ease'));
+                        element.css(getTransition('transform ' + scrollingSpeed + 'ms ease'));
                     }
 
-                    element.on('transitionend oTransitionEnd webkitTransitionEnd', $.proxy(function () {
+                    element.on('transitionend oTransitionEnd webkitTransitionEnd', $.proxy(function (e) {
                         element.off('transitionend oTransitionEnd webkitTransitionEnd');
                         this.get('callback')(value, this.sectionsElement.eq(value), element, this.get('animated') ? next : next());
                     }, this)).css(getTransforms('translate3d(0px, -' + top + 'px, 0px)'));
@@ -362,19 +366,19 @@
         }
 
         if (window.addEventListener) {
-            document.addEventListener(mouseWheelEventName, handler, false);
+            element[0].addEventListener(mouseWheelEventName, handler, false);
         } else {
-            document.attachEvent(mouseWheelEventName, handler, false);
+            element[0].attachEvent(mouseWheelEventName, handler, false);
         }
     }
 
     function removeMouseWheelHandler(element, handler) {
         var mouseWheelEventName = element.data('mouseWheelEventName');
 
-        if (document.addEventListener) {
-            document.removeEventListener(mouseWheelEventName, handler, false);
+        if (window.addEventListener) {
+            element[0].removeEventListener(mouseWheelEventName, handler, false);
         } else {
-            document.detachEvent(mouseWheelEventName, handler);
+            element[0].detachEvent(mouseWheelEventName, handler);
         }
     }
 
