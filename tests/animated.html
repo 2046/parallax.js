@@ -27,7 +27,7 @@
 <script>
     $('.wrapper').parallax({
       animated : true,
-      callback : function (currentIndex, currentPage, container, next) {
+      callback : function (currentIndex, currentPage, direction, container, next) {
         setTimeout(function(){
           next();
         }, 1000);
