@@ -26,8 +26,8 @@
 <script src="js/dist/parallax.js"></script>
 <script>
     $('.wrapper').parallax({
-      callback : function(currentIndex, currentPage, container, next){
-        console.log(currentIndex, currentPage, container, next);
+      callback : function(currentIndex, currentPage, direction, container, next){
+        console.log(currentIndex, currentPage, direction, container, next);
       }
     });
 </script>
