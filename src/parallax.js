@@ -15,7 +15,7 @@
             animated: false,
             scrollingSpeed: 1000,
             bottomShowScrollBar: false,
-            callback: function (currentIndex, currentPage, container, next) {
+            callback: function (currentIndex, currentPage, direction, container, next) {
             }
         }, options);
 
@@ -24,6 +24,7 @@
                 width: 0,
                 height: 0,
                 crop: null,
+                direction : '',
                 currentPage: 0,
                 scrollingSpeed: 0,
                 animationing: false
@@ -190,7 +191,8 @@
                     this.set('animationing', false);
                     return;
                 }
-
+                
+                this.set('direction', 'up');
                 this.set('animationing', true);
                 this.set('currentPage', --currentPage);
             },
@@ -202,7 +204,8 @@
                     this.set('animationing', false);
                     return;
                 }
-
+                
+                this.set('direction', 'down');
                 this.set('animationing', true);
                 this.set('currentPage', ++currentPage);
             },
@@ -279,13 +282,13 @@
 
                     element.on('transitionend oTransitionEnd webkitTransitionEnd', $.proxy(function (e) {
                         element.off('transitionend oTransitionEnd webkitTransitionEnd');
-                        this.get('callback')(value, this.sectionsElement.eq(value), element, this.get('animated') ? next : next());
+                        this.get('callback')(value, this.sectionsElement.eq(value), this.get('direction'), element, this.get('animated') ? next : next());
                     }, this)).css(getTransforms('translate3d(0px, -' + top + 'px, 0px)'));
                 } else {
                     element.animate({
                         top: -top
                     }, scrollingSpeed, $.proxy(function () {
-                        this.get('callback')(value, this.sectionsElement.eq(value), element, this.get('animated') ? next : next());
+                        this.get('callback')(value, this.sectionsElement.eq(value), this.get('direction'), element, this.get('animated') ? next : next());
                     }, this));
                 }
             }
